@@ -1,6 +1,7 @@
 # Реалізація інформаційного та програмного забезпечення
 
 ## SQL-скрипт для створення та початкового наповнення бази даних
+
 ```
 
 -- MySQL Workbench Forward Engineering
@@ -363,5 +364,163 @@ COMMIT;
 
 
 ```
-- RESTfull сервіс для управління даними
 
+# RESTfull сервіс для управління даними
+
+В цьому розділі будуть розглянуті функції, що відповідають за роботу з базою
+даних. Розберемо кожену з них та її роботу.
+
+## Схема prisma
+
+Для того щоб зв'язуватись з базою було використано prismaORM, що є дуже зручним та сучасним вибором розробників. База даних в проекті postgreSQL, яка відома своєю надійністю та захищеністю. Ось так виглядає prisma схема:
+
+```js
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+}
+```
+
+На цій схемі присутній генератор клієну, він вказує на те що буде створено Prisma клієнт для мови програмування JavaScript. Частина коду з datasource вказує Prisma, як приєднатись до бази даних. Модель User вказує які параметри має користувач.
+
+## Підготовка до роботи
+
+Щоб можна було писати частину backend та працювати з базою даних, потрібно створити конфігурацію цього вебсерверу:
+
+```js
+const express = require("express");
+const app = express();
+
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
+
+app.listen(4444);
+app.use(express.json());
+```
+
+В цих базових налаштуваннях видно, що для роботи використовується популярний фркймворк express, а для роботи з базою даних PrismaORM. Порт на якому будуть оброблятись всі події - 4444.
+
+## Функція для того, щоб дістати всіх користувачів з бази даних
+
+```js
+app.get("/users", async (req, res) => {
+  const users = await prisma.user.findMany();
+  res.status(200).json(users);
+});
+```
+
+Метод get() вказує нате що ми будемодіставати дані за ендпоінтом /users тобто url рядок виглядатиме так:
+
+```
+http://localhost:4444/users
+```
+
+Функція асинхронна, при правильній обробці події статус код 200, що повідомляє про успішне виконання. Метод findMany() дістає всі дані з бази даних.
+
+## Функція для того, щоб дістати користувача за його id
+
+```js
+app.get("/users/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await prisma.user.findUnique({ where: { id: parseInt(id) } });
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+});
+```
+
+Ця функція аналогічна попередній, єдине, що тепер з ендпойнту береться id користувача, та за цим id буде здійснено пошук. Якщо такий користквач існує - статус код 200 поверкає користувача, інакше статус код 404. В разі помилки статус код 500 та буде виведена помилка.
+
+## Функція для того, щоб додати користувача
+
+```js
+app.post("/users", async (req, res) => {
+  try {
+    const { name, email } = req.body;
+    const user = await prisma.user.create({
+      data: {
+        name: name,
+        email: email,
+      },
+    });
+    res.status(200).json(user);
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+});
+```
+
+Функція post() вказує на те, що в базу даних буде щось додано. А саме створено користувача, для цьогопотрібно передати його параметри в body.
+
+## Функція для того, щоб редагувати дані користувача
+
+```js
+app.patch("/users/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { email, name } = req.body;
+    const user = await prisma.user.findUnique({ where: { id: parseInt(id) } });
+    if (user) {
+      const userUpdated = await prisma.user.update({
+        where: { id: parseInt(id) },
+        data: {
+          email,
+          name,
+        },
+      });
+      res.status(200).json(userUpdated);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+});
+```
+
+Функція patch() вказує на те, що в базі даних щось буде відредаговано. В контексті наведеного коду здійснюється пошук користувача за його id, якщо він існує - статус код 200 відредагувати дані користувача даними з body, інакше - статус код 404 користувач не знайдений. У разі іншої помилки статус код 500 та буде виведено помилку.
+
+## Функція для того, щоб видалити користувача
+
+```js
+app.delete("/users/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await prisma.user.findUnique({ where: { id: parseInt(id) } });
+    if (user) {
+      const userDeleted = await prisma.user.delete({
+        where: { id: parseInt(id) },
+      });
+      res.status(200).json({ message: "User was deleted" });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+});
+```
+
+Функція delete() вказує на те, що щось буде видалено з бази даних. З url береться id того користувача якого треба видалити. Якщо користувач з таким id існує, тоді статус код 200 та видалити цього користувача, інакше - статус код 404 користувача з таким id не існує. У разі іншої помилки вивести цю помилку.
