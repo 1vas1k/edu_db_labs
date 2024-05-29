@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Реалізація інформаційного та програмного забезпечення | Система управління проектами</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="/edu_db_labs/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="description" content="Лабораторні роботи з дисципліни &quot;Організація баз даних&quot;">
+    
+    <link rel="preload" href="/edu_db_labs/assets/css/0.styles.11887572.css" as="style"><link rel="preload" href="/edu_db_labs/assets/js/app.6732ae67.js" as="script"><link rel="preload" href="/edu_db_labs/assets/js/2.b04b19e1.js" as="script"><link rel="preload" href="/edu_db_labs/assets/js/1.618f7b3f.js" as="script"><link rel="preload" href="/edu_db_labs/assets/js/37.5a1e2c0e.js" as="script"><link rel="prefetch" href="/edu_db_labs/assets/js/10.aa863558.js"><link rel="prefetch" href="/edu_db_labs/assets/js/13.03a6ce61.js"><link rel="prefetch" href="/edu_db_labs/assets/js/14.44317190.js"><link rel="prefetch" href="/edu_db_labs/assets/js/15.01129638.js"><link rel="prefetch" href="/edu_db_labs/assets/js/16.4d3462cd.js"><link rel="prefetch" href="/edu_db_labs/assets/js/17.58591fb6.js"><link rel="prefetch" href="/edu_db_labs/assets/js/18.413baacc.js"><link rel="prefetch" href="/edu_db_labs/assets/js/19.34716b84.js"><link rel="prefetch" href="/edu_db_labs/assets/js/20.dc5cf6cb.js"><link rel="prefetch" href="/edu_db_labs/assets/js/21.7d4308de.js"><link rel="prefetch" href="/edu_db_labs/assets/js/22.46dd4ed9.js"><link rel="prefetch" href="/edu_db_labs/assets/js/23.79800473.js"><link rel="prefetch" href="/edu_db_labs/assets/js/24.990d8b1b.js"><link rel="prefetch" href="/edu_db_labs/assets/js/25.e3ca5acb.js"><link rel="prefetch" href="/edu_db_labs/assets/js/26.8d0c0409.js"><link rel="prefetch" href="/edu_db_labs/assets/js/27.84ef935a.js"><link rel="prefetch" href="/edu_db_labs/assets/js/28.c975bc32.js"><link rel="prefetch" href="/edu_db_labs/assets/js/29.eb2d1bc4.js"><link rel="prefetch" href="/edu_db_labs/assets/js/3.57c8205e.js"><link rel="prefetch" href="/edu_db_labs/assets/js/30.e23b410a.js"><link rel="prefetch" href="/edu_db_labs/assets/js/31.0ba89ce4.js"><link rel="prefetch" href="/edu_db_labs/assets/js/32.78addd9e.js"><link rel="prefetch" href="/edu_db_labs/assets/js/33.93853b66.js"><link rel="prefetch" href="/edu_db_labs/assets/js/34.4f06bdcf.js"><link rel="prefetch" href="/edu_db_labs/assets/js/35.74b26599.js"><link rel="prefetch" href="/edu_db_labs/assets/js/36.bf2cd950.js"><link rel="prefetch" href="/edu_db_labs/assets/js/38.6f707da5.js"><link rel="prefetch" href="/edu_db_labs/assets/js/39.7a9d6e4d.js"><link rel="prefetch" href="/edu_db_labs/assets/js/4.326bdc2c.js"><link rel="prefetch" href="/edu_db_labs/assets/js/40.b3ea2d00.js"><link rel="prefetch" href="/edu_db_labs/assets/js/41.c8373cb3.js"><link rel="prefetch" href="/edu_db_labs/assets/js/5.99c824c4.js"><link rel="prefetch" href="/edu_db_labs/assets/js/6.866963b8.js"><link rel="prefetch" href="/edu_db_labs/assets/js/7.8e2c935a.js"><link rel="prefetch" href="/edu_db_labs/assets/js/8.8ec552ec.js"><link rel="prefetch" href="/edu_db_labs/assets/js/9.bacad51b.js"><link rel="prefetch" href="/edu_db_labs/assets/js/vendors~docsearch.7eb60035.js">
+    <link rel="stylesheet" href="/edu_db_labs/assets/css/0.styles.11887572.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/edu_db_labs/" class="home-link router-link-active"><!----> <span class="site-name">Система управління проектами</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/edu_db_labs/" class="nav-link">
+  Початок
+</a></div> <a href="https://github.com/Tomas997/edu_db_labs" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/edu_db_labs/" class="nav-link">
+  Початок
+</a></div> <a href="https://github.com/Tomas997/edu_db_labs" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/edu_db_labs/intro/" class="sidebar-link">Вступ</a></li><li><section class="sidebar-group collapsable depth-0"><a href="/edu_db_labs/requirements/" class="sidebar-heading clickable"><span>Розроблення загальних вимог до системи</span> <span class="arrow right"></span></a> <!----></section></li><li><a href="/edu_db_labs/use%20cases/" class="sidebar-link">Розроблення вимог до функціональности системи</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/edu_db_labs/use%20cases/#загальна-схема" class="sidebar-link">Загальна схема</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/use%20cases/#тімлід" class="sidebar-link">Тімлід</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/use%20cases/#робітник" class="sidebar-link">Робітник</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/use%20cases/#адміністратор" class="sidebar-link">Адміністратор</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/use%20cases/#сценаріі-використання" class="sidebar-link">Сценарії використання</a></li></ul></li><li><a href="/edu_db_labs/design/" class="sidebar-link">Проектування інформаційного забезпечення</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/edu_db_labs/design/#модель-бізнес-об-єктів" class="sidebar-link">Модель бізнес-об'єктів</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/design/#er-модель" class="sidebar-link">ER-модель</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/design/#реляціина-схема" class="sidebar-link">Реляційна схема</a></li></ul></li><li><a href="/edu_db_labs/software/" aria-current="page" class="active sidebar-link">Реалізація інформаційного та програмного забезпечення</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/edu_db_labs/software/#sql-скрипт-для-створення-та-початкового-наповнення-бази-даних" class="sidebar-link">SQL-скрипт для створення та початкового наповнення бази даних</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/software/#схема-prisma" class="sidebar-link">Схема prisma</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/software/#підготовка-до-роботи" class="sidebar-link">Підготовка до роботи</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/software/#функція-для-того-щоб-дістати-всіх-користувачів-з-бази-даних" class="sidebar-link">Функція для того, щоб дістати всіх користувачів з бази даних</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/software/#функція-для-того-щоб-дістати-користувача-за-иого-id" class="sidebar-link">Функція для того, щоб дістати користувача за його id</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/software/#функція-для-того-щоб-додати-користувача" class="sidebar-link">Функція для того, щоб додати користувача</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/software/#функція-для-того-щоб-редагувати-дані-користувача" class="sidebar-link">Функція для того, щоб редагувати дані користувача</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/software/#функція-для-того-щоб-видалити-користувача" class="sidebar-link">Функція для того, щоб видалити користувача</a></li></ul></li><li><a href="/edu_db_labs/test/" class="sidebar-link">Тестування працездатності системи</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/edu_db_labs/test/#створення-нового-користувача" class="sidebar-link">Створення нового користувача</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/test/#дістати-всіх-користувачів" class="sidebar-link">Дістати всіх користувачів</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/test/#дістати-користувача-з-иого-id" class="sidebar-link">Дістати користувача з його id</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/test/#редагувати-дані-користувача" class="sidebar-link">Редагувати дані користувача</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/test/#видалити-користувача" class="sidebar-link">Видалити користувача</a></li><li class="sidebar-sub-header"><a href="/edu_db_labs/test/#результат-у-базі-даних" class="sidebar-link">Результат у базі даних</a></li></ul></li><li><a href="/edu_db_labs/conclusion/" class="sidebar-link">Висновки</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="реалізація-інформаціиного-та-програмного-забезпечення"><a href="#реалізація-інформаціиного-та-програмного-забезпечення" class="header-anchor">#</a> Реалізація інформаційного та програмного забезпечення</h1> <h2 id="sql-скрипт-для-створення-та-початкового-наповнення-бази-даних"><a href="#sql-скрипт-для-створення-та-початкового-наповнення-бази-даних" class="header-anchor">#</a> SQL-скрипт для створення та початкового наповнення бази даних</h2> <div class="language- extra-class"><pre class="language-text"><code>
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema schema
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `schema` ;
+
+-- -----------------------------------------------------
+-- Schema schema
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `schema` DEFAULT CHARACTER SET utf8 ;
+USE `schema` ;
+
+-- -----------------------------------------------------
+-- Table `schema`.`Project`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schema`.`Project` (
+  `idProject` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`idProject`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `schema`.`Team`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schema`.`Team` (
+  `idTeam` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  `description` VARCHAR(256) NULL,
+  `Project_id` INT NOT NULL,
+  PRIMARY KEY (`idTeam`),
+  INDEX `Project_id_idx` (`Project_id` ASC) VISIBLE,
+  CONSTRAINT `Project_id`
+    FOREIGN KEY (`Project_id`)
+    REFERENCES `schema`.`Project` (`idProject`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `schema`.`Role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schema`.`Role` (
+  `idRole` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`idRole`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `schema`.`User`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schema`.`User` (
+  `idUser` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `photo` VARCHAR(256) NULL,
+  `is_banned` TINYINT NOT NULL,
+  PRIMARY KEY (`idUser`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `schema`.`Collaborators`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schema`.`Collaborators` (
+  `idCollaborators` INT NOT NULL AUTO_INCREMENT,
+  `Role_id` INT NOT NULL,
+  `User_id` INT NOT NULL,
+  `Team_id` INT NOT NULL,
+  PRIMARY KEY (`idCollaborators`),
+  INDEX `Team_id_idx` (`Team_id` ASC) VISIBLE,
+  INDEX `Role_id_idx` (`Role_id` ASC) VISIBLE,
+  INDEX `User_id_idx` (`User_id` ASC) VISIBLE,
+  CONSTRAINT `Team_id`
+    FOREIGN KEY (`Team_id`)
+    REFERENCES `schema`.`Team` (`idTeam`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Role_id`
+    FOREIGN KEY (`Role_id`)
+    REFERENCES `schema`.`Role` (`idRole`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `User_id`
+    FOREIGN KEY (`User_id`)
+    REFERENCES `schema`.`User` (`idUser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `schema`.`Permission`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schema`.`Permission` (
+  `idPermission` INT NOT NULL AUTO_INCREMENT,
+  `action` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idPermission`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `schema`.`Grant`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schema`.`Grant` (
+  `Role_id` INT NOT NULL,
+  `Permission_id` INT NOT NULL,
+  PRIMARY KEY (`Role_id`, `Permission_id`),
+  INDEX `Permission_id_idx` (`Permission_id` ASC) VISIBLE,
+  CONSTRAINT `Grant_Role_id`
+    FOREIGN KEY (`Role_id`)
+    REFERENCES `schema`.`Role` (`idRole`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Permission_id`
+    FOREIGN KEY (`Permission_id`)
+    REFERENCES `schema`.`Permission` (`idPermission`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `schema`.`Task`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schema`.`Task` (
+  `idTask` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(256) NULL,
+  `deadline` DATETIME NULL,
+  `creation_date` DATETIME NOT NULL,
+  PRIMARY KEY (`idTask`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `schema`.`Assignment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schema`.`Assignment` (
+  `idAssignment` INT NOT NULL AUTO_INCREMENT,
+  `date_time` DATETIME NULL,
+  `Collaborator_id` INT NOT NULL,
+  `Task_id` INT NOT NULL,
+  PRIMARY KEY (`idAssignment`),
+  INDEX `Collaborator_id_idx` (`Collaborator_id` ASC) VISIBLE,
+  INDEX `Task_id_idx` (`Task_id` ASC) VISIBLE,
+  CONSTRAINT `Collaborator_id`
+    FOREIGN KEY (`Collaborator_id`)
+    REFERENCES `schema`.`Collaborators` (`idCollaborators`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Task_id`
+    FOREIGN KEY (`Task_id`)
+    REFERENCES `schema`.`Task` (`idTask`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `schema`.`Action`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schema`.`Action` (
+  `Task_id` INT NOT NULL,
+  `Assignment_id` INT NOT NULL,
+  `Collaborator_id` INT NOT NULL,
+  `date_time` DATETIME NULL,
+  PRIMARY KEY (`Collaborator_id`, `Assignment_id`, `Task_id`),
+  INDEX `Assignment_id_idx` (`Assignment_id` ASC) VISIBLE,
+  INDEX `Collaborator_id_idx` (`Collaborator_id` ASC) VISIBLE,
+  INDEX `Task_id_idx` (`Task_id` ASC) VISIBLE,
+  CONSTRAINT `Action_Task_id`
+    FOREIGN KEY (`Task_id`)
+    REFERENCES `schema`.`Task` (`idTask`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Assignment_id`
+    FOREIGN KEY (`Assignment_id`)
+    REFERENCES `schema`.`Assignment` (`idAssignment`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Action_Collaborator_id`
+    FOREIGN KEY (`Collaborator_id`)
+    REFERENCES `schema`.`Collaborators` (`idCollaborators`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `schema`.`Tag`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schema`.`Tag` (
+  `idTag` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(256) NULL,
+  PRIMARY KEY (`idTag`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `schema`.`Label`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `schema`.`Label` (
+  `Task_id` INT NOT NULL,
+  `Tag_id` INT NOT NULL,
+  PRIMARY KEY (`Task_id`, `Tag_id`),
+  INDEX `Tag_id_idx` (`Tag_id` ASC) VISIBLE,
+  CONSTRAINT `Label_Task_id`
+    FOREIGN KEY (`Task_id`)
+    REFERENCES `schema`.`Task` (`idTask`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Tag_id`
+    FOREIGN KEY (`Tag_id`)
+    REFERENCES `schema`.`Tag` (`idTag`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+
+
+
+
+
+-- Початок транзакції
+START TRANSACTION;
+
+-- Додавання даних в таблицю `schema`.`Permission`
+INSERT INTO `schema`.`Permission` (`action`)
+VALUES
+    -- collaborator
+    ('EditUser'),
+    ('CreateTask'),
+    ('EditTask'),
+    ('DeleteTask'),
+    ('FilterTask'),
+    ('CommentTask'),
+    -- teamlead
+    ('CreateProject'),
+    ('DeleteProject'),
+    ('CreateSprint'),
+    ('FinishSprint'),
+    ('AddMember'),
+    ('DeleteMember'),
+    -- admin
+    ('UserSupport'),
+    ('BanUser'),
+    ('UnBanUser');
+
+
+-- Додавання даних в таблицю `schema`.`Role`
+INSERT INTO `schema`.`Role` (`name`, `description`)
+VALUES
+    ('Administrator', 'Administrator role'),
+    ('Team-lead', 'Team-lead role'),
+    ('Collaborator', 'Developer role');
+
+-- Додавання даних в таблицю `schema`.`Grant`
+INSERT INTO `schema`.`Grant` (`Role_id`, `Permission_id`)
+VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (1, 4),
+    (1, 5),
+    (1, 6),
+    (1, 7),
+    (1, 8),
+    (1, 9),
+    (1, 10),
+    (1, 11),
+    (1, 12),
+    (1, 13),
+    (1, 14),
+    (1, 15),
+
+    (2, 1),
+    (2, 2),
+    (2, 3),
+    (2, 4),
+    (2, 5),
+    (2, 6),
+    (2, 7),
+    (2, 8),
+    (2, 9),
+    (2, 10),
+    (2, 11),
+    (2, 12),
+
+    (3, 1),
+    (3, 2),
+    (3, 3),
+    (3, 4),
+    (3, 5),
+    (3, 6);
+
+
+-- Додавання даних в таблицю `schema`.`Project`
+INSERT INTO `schema`.`Project` (`name`, `description`)
+VALUES
+    ('Project 1', 'Description for Project 1'),
+    ('Project 2', 'Description for Project 2');
+
+-- Додавання даних в таблицю `schema`.`Team`
+INSERT INTO `schema`.`Team` (`idTeam`, `name`, `description`, `Project_id`)
+VALUES
+    (1, 'Team 1', 'description1', 1),
+    (2, 'Team 2', 'description2', 2);
+
+-- Додавання даних в таблицю `schema`.`User`
+INSERT INTO `schema`.`User` (`name`, `email`, `password`, `photo`, `is_banned`)
+VALUES
+    ('User1', 'user1@example.com', 'password1', 'link.com/photo', 0),
+    ('User2', 'user2@example.com', 'password2', 'link.com/photo', 0);
+
+-- Додавання даних в таблицю `schema`.`Collaborators`
+INSERT INTO `schema`.`Collaborators` (`Role_id`, `User_id`, `Team_id`)
+VALUES
+    (1, 1, 1),  -- Admin User 1 in Team 1
+    (2, 2, 2);  -- Manager User 2 in Team 2
+
+
+
+-- Додавання даних в таблицю `schema`.`Task`
+INSERT INTO `schema`.`Task` (`name`, `description`, `deadline`, `creation_date`)
+VALUES
+    ('Task 1', 'Description for Task 1', '2023-10-31 12:00:00', NOW()),
+    ('Task 2', 'Description for Task 2', '2023-11-15 14:30:00', NOW()),
+    ('Task 3', 'Description for Task 3', '2023-11-20 10:00:00', NOW());
+
+-- Додавання тестових даних в таблицю `schema.Assignment`
+INSERT INTO `schema`.`Assignment` (`date_time`, `Collaborator_id`, `Task_id`)
+VALUES
+    ('2023-10-18 11:30:00', 1, 1),
+    ('2023-10-19 14:15:00', 2, 2),
+    ('2023-10-20 09:45:00', 1, 3);
+
+
+COMMIT;
+
+
+</code></pre></div><h1 id="restfull-сервіс-для-управління-даними"><a href="#restfull-сервіс-для-управління-даними" class="header-anchor">#</a> RESTfull сервіс для управління даними</h1> <p>В цьому розділі будуть розглянуті функції, що відповідають за роботу з базою
+даних. Розберемо кожену з них та її роботу.</p> <h2 id="схема-prisma"><a href="#схема-prisma" class="header-anchor">#</a> Схема prisma</h2> <p>Для того щоб зв'язуватись з базою було використано prismaORM, що є дуже зручним та сучасним вибором розробників. База даних в проекті postgreSQL, яка відома своєю надійністю та захищеністю. Ось так виглядає prisma схема:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// This is your Prisma schema file,</span>
+<span class="token comment">// learn more about it in the docs: https://pris.ly/d/prisma-schema</span>
+
+<span class="token comment">// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?</span>
+<span class="token comment">// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init</span>
+
+generator client <span class="token punctuation">{</span>
+  provider <span class="token operator">=</span> <span class="token string">&quot;prisma-client-js&quot;</span>
+<span class="token punctuation">}</span>
+
+datasource db <span class="token punctuation">{</span>
+  provider <span class="token operator">=</span> <span class="token string">&quot;postgresql&quot;</span>
+  url      <span class="token operator">=</span> <span class="token function">env</span><span class="token punctuation">(</span><span class="token string">&quot;DATABASE_URL&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+model User <span class="token punctuation">{</span>
+  id    Int     @id @<span class="token keyword">default</span><span class="token punctuation">(</span><span class="token function">autoincrement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  email String  @unique
+  name  String<span class="token operator">?</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>На цій схемі присутній генератор клієну, він вказує на те що буде створено Prisma клієнт для мови програмування JavaScript. Частина коду з datasource вказує Prisma, як приєднатись до бази даних. Модель User вказує які параметри має користувач.</p> <h2 id="підготовка-до-роботи"><a href="#підготовка-до-роботи" class="header-anchor">#</a> Підготовка до роботи</h2> <p>Щоб можна було писати частину backend та працювати з базою даних, потрібно створити конфігурацію цього вебсерверу:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;express&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span> PrismaClient <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;@prisma/client&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> prisma <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PrismaClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">4444</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>В цих базових налаштуваннях видно, що для роботи використовується популярний фркймворк express, а для роботи з базою даних PrismaORM. Порт на якому будуть оброблятись всі події - 4444.</p> <h2 id="функція-для-того-щоб-дістати-всіх-користувачів-з-бази-даних"><a href="#функція-для-того-щоб-дістати-всіх-користувачів-з-бази-даних" class="header-anchor">#</a> Функція для того, щоб дістати всіх користувачів з бази даних</h2> <div class="language-js extra-class"><pre class="language-js"><code>app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;/users&quot;</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> users <span class="token operator">=</span> <span class="token keyword">await</span> prisma<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">findMany</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span>users<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>Метод get() вказує нате що ми будемодіставати дані за ендпоінтом /users тобто url рядок виглядатиме так:</p> <div class="language- extra-class"><pre class="language-text"><code>http://localhost:4444/users
+</code></pre></div><p>Функція асинхронна, при правильній обробці події статус код 200, що повідомляє про успішне виконання. Метод findMany() дістає всі дані з бази даних.</p> <h2 id="функція-для-того-щоб-дістати-користувача-за-иого-id"><a href="#функція-для-того-щоб-дістати-користувача-за-иого-id" class="header-anchor">#</a> Функція для того, щоб дістати користувача за його id</h2> <div class="language-js extra-class"><pre class="language-js"><code>app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;/users/:id&quot;</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> id <span class="token punctuation">}</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>params<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword">await</span> prisma<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">findUnique</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">where</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>user<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">404</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">&quot;User not found&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">message</span><span class="token operator">:</span> e<span class="token punctuation">.</span>message <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>Ця функція аналогічна попередній, єдине, що тепер з ендпойнту береться id користувача, та за цим id буде здійснено пошук. Якщо такий користквач існує - статус код 200 поверкає користувача, інакше статус код 404. В разі помилки статус код 500 та буде виведена помилка.</p> <h2 id="функція-для-того-щоб-додати-користувача"><a href="#функція-для-того-щоб-додати-користувача" class="header-anchor">#</a> Функція для того, щоб додати користувача</h2> <div class="language-js extra-class"><pre class="language-js"><code>app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">&quot;/users&quot;</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> name<span class="token punctuation">,</span> email <span class="token punctuation">}</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword">await</span> prisma<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> name<span class="token punctuation">,</span>
+        <span class="token literal-property property">email</span><span class="token operator">:</span> email<span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">message</span><span class="token operator">:</span> e<span class="token punctuation">.</span>message <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>Функція post() вказує на те, що в базу даних буде щось додано. А саме створено користувача, для цьогопотрібно передати його параметри в body.</p> <h2 id="функція-для-того-щоб-редагувати-дані-користувача"><a href="#функція-для-того-щоб-редагувати-дані-користувача" class="header-anchor">#</a> Функція для того, щоб редагувати дані користувача</h2> <div class="language-js extra-class"><pre class="language-js"><code>app<span class="token punctuation">.</span><span class="token function">patch</span><span class="token punctuation">(</span><span class="token string">&quot;/users/:id&quot;</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> id <span class="token punctuation">}</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>params<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> email<span class="token punctuation">,</span> name <span class="token punctuation">}</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword">await</span> prisma<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">findUnique</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">where</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>user<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> userUpdated <span class="token operator">=</span> <span class="token keyword">await</span> prisma<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">where</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          email<span class="token punctuation">,</span>
+          name<span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span>userUpdated<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">404</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">&quot;User not found&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">message</span><span class="token operator">:</span> e<span class="token punctuation">.</span>message <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>Функція patch() вказує на те, що в базі даних щось буде відредаговано. В контексті наведеного коду здійснюється пошук користувача за його id, якщо він існує - статус код 200 відредагувати дані користувача даними з body, інакше - статус код 404 користувач не знайдений. У разі іншої помилки статус код 500 та буде виведено помилку.</p> <h2 id="функція-для-того-щоб-видалити-користувача"><a href="#функція-для-того-щоб-видалити-користувача" class="header-anchor">#</a> Функція для того, щоб видалити користувача</h2> <div class="language-js extra-class"><pre class="language-js"><code>app<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token string">&quot;/users/:id&quot;</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> id <span class="token punctuation">}</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>params<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword">await</span> prisma<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">findUnique</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">where</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>user<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> userDeleted <span class="token operator">=</span> <span class="token keyword">await</span> prisma<span class="token punctuation">.</span>user<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">where</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">&quot;User was deleted&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">404</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">&quot;User not found&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">message</span><span class="token operator">:</span> e<span class="token punctuation">.</span>message <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>Функція delete() вказує на те, що щось буде видалено з бази даних. З url береться id того користувача якого треба видалити. Якщо користувач з таким id існує, тоді статус код 200 та видалити цього користувача, інакше - статус код 404 користувача з таким id не існує. У разі іншої помилки вивести цю помилку.</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Останнє оновлення:</span> <span class="time">5/29/2024, 11:26:38 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/edu_db_labs/design/" class="prev">
+        Проектування інформаційного забезпечення
+      </a></span> <span class="next"><a href="/edu_db_labs/test/">
+        Тестування працездатності системи
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/edu_db_labs/assets/js/app.6732ae67.js" defer></script><script src="/edu_db_labs/assets/js/2.b04b19e1.js" defer></script><script src="/edu_db_labs/assets/js/1.618f7b3f.js" defer></script><script src="/edu_db_labs/assets/js/37.5a1e2c0e.js" defer></script>
+  </body>
+</html>
